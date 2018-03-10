@@ -23,7 +23,7 @@
   "license": "MIT",
   "homepage": "http://github.com/tevix/seneca-gcloudpubsub-transport",
   "dependencies": {
-    "@google-cloud/pubsub": "0.13.2",
+    "@google-cloud/pubsub": "0.15.0",
     "lodash": "4.17.4",
     "nid": "0.3.2"
   },
