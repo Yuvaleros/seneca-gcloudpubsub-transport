@@ -89,7 +89,8 @@ module.exports = function (options) {
     const subscriber_name = topicPrefix + '.' + kind;
     const subs_options = {
       flowControl: {
-        maxMessages: 1
+        maxMessages: 1,
+        reuseExisting: true
       }
     };
 
