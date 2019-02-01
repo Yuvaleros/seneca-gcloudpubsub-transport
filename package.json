@@ -1,11 +1,11 @@
 {
   "name": "seneca-gcloudpubsub-transport",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Seneca GCLOUD pub/sub transport",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tevix/seneca-gcloudpubsub-transport.git"
+    "url": "https://github.com/yuvaleros/seneca-gcloudpubsub-transport.git"
   },
   "keywords": [
     "seneca",
