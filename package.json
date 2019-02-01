@@ -24,7 +24,7 @@
   "homepage": "http://github.com/yuvaleros/seneca-gcloudpubsub-transport",
   "dependencies": {
     "@google-cloud/pubsub": "0.24.1",
-    "lodash": "4.17.4",
+    "lodash": "^4.17.11",
     "nid": "0.3.2"
   },
   "devDependencies": {

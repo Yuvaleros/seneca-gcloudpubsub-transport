@@ -1,4 +1,4 @@
-const gcloud = require('@google-cloud/pubsub');
+const {PubSub} = require('@google-cloud/pubsub');
 const _ = require('lodash');
 const nid = require('nid');
 
@@ -11,14 +11,14 @@ module.exports = function (options) {
   const transportUtils = seneca.export('transport/utils');
 
   options = seneca.util.deepextend({
-    gcloud: {
+      PubSub: {
       topicPrefix: '',
       projectId: '',
       keyFilename: ''
     }
   }, options);
 
-  let topicPrefix = options.gcloud.topicPrefix;
+  let topicPrefix = options.PubSub.topicPrefix;
 
   seneca.add('role:transport,hook:listen,type:gcloud', hook_listen_gcloud);
   seneca.add('role:transport,hook:client,type:gcloud', hook_client_gcloud);
@@ -35,7 +35,7 @@ module.exports = function (options) {
     // seneca.log.info(options['gcloud']);
     // const clientOpts = JSON.parse(options['gcloud']);
 
-    pubsub = new gcloud({
+    pubsub = new PubSub({
       projectId: opts.projectId,
       keyFilename: opts.keyFilename
     });
