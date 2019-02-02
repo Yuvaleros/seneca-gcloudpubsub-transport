@@ -92,7 +92,7 @@ module.exports = function (options) {
       seneca.log.info(`Created subscription to "${topic.name}", Subscription: ${subscriber_name}`);
       return subscription;
     } catch (err) {
-        if (err.code === 409) { // If the subscription already exists, just return it
+        if (err.code === 409 || err.code === 6) { // If the subscription already exists, just return it
             seneca.log.warn('subscription "' + subscriber_name + '" already exists.');
             return topic.subscription(subscriber_name);
         }
