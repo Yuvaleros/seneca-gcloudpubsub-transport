@@ -56,7 +56,7 @@ module.exports = function (options) {
         seneca.log.info(`Topic "${topicName}" created (or it existed already)`);
         return existingTopic;
       } catch (err) {
-        if (err.code === 409) { // If the topic already exists, just return it
+        if (err.code === 409 || err.code === 6) { // If the topic already exists, just return it
           seneca.log.warn('Topic "' + topicName + '" already exists.');
           return pubsub.topic(topicName);
         }
