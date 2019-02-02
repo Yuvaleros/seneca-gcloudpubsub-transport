@@ -133,8 +133,8 @@ module.exports = function (options) {
           if (out == null) return;
 
           try {
-            const topic = pubsub.topic(res_topic);
-            const publisher = topic.publisher();
+            const topic = pubsub.topic(res_topic.name);
+            const publisher = topic.publisher;
             await publisher.publish(Buffer.from(JSON.stringify(transportUtils.stringifyJSON(seneca, 'listen-' + type, out))));
           } catch (err) {
             if (err)
@@ -218,7 +218,7 @@ module.exports = function (options) {
 
           try {
             const topic = pubsub.topic(act_topic.name);
-            const publisher = topic.publisher();
+            const publisher = topic.publisher;
             publisher.publish('Hello');
             await publisher.publish(Buffer.from(JSON.stringify(transportUtils.stringifyJSON(seneca, 'client-' + type, outmsg))));
           } catch (err) {
