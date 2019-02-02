@@ -133,7 +133,8 @@ module.exports = function (options) {
           if (out == null) return;
 
           try {
-            const publisher = res_topic.publisher();
+            const topic = pubsub.topic(res_topic);
+            const publisher = topic.publisher();
             await publisher.publish(Buffer.from(JSON.stringify(transportUtils.stringifyJSON(seneca, 'listen-' + type, out))));
           } catch (err) {
             if (err)
