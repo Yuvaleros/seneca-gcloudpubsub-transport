@@ -217,7 +217,8 @@ module.exports = function (options) {
           const outmsg = transportUtils.prepare_request(this, args, done, meta);
 
           try {
-            const publisher = pubsub.topic(act_topic.name).publisher();
+            const topic = pubsub.topic(act_topic.name);
+            const publisher = topic.publisher();
             publisher.publish('Hello');
             await publisher.publish(Buffer.from(JSON.stringify(transportUtils.stringifyJSON(seneca, 'client-' + type, outmsg))));
           } catch (err) {
