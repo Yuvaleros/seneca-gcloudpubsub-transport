@@ -7,7 +7,6 @@ module.exports = function (options) {
   const plugin = 'gcloudpubsub-transport';
   let pubsub;
 
-  const so = seneca.options();
   const transportUtils = seneca.export('transport/utils');
 
   options = seneca.util.deepextend({
@@ -23,12 +22,6 @@ module.exports = function (options) {
   seneca.add('role:transport,hook:listen,type:gcloud', hook_listen_gcloud);
   seneca.add('role:transport,hook:client,type:gcloud', hook_client_gcloud);
   seneca.add('role:seneca,cmd:close', shutdown);
-
-  function make_error_handler(type, tag) {
-    return (note, err) => {
-      seneca.log.error(type, tag, note, err, 'CLOSED');
-    }
-  }
 
   async function init(opts) {
     // seneca.log.info('OPTIONS');
@@ -99,8 +92,14 @@ module.exports = function (options) {
       seneca.log.info(`Created subscription to "${topic.name}", Subscription: ${subscriber_name}`);
       return subscription;
     } catch (err) {
-      seneca.log.error(`Failed to subscribe to "${topic.name}"`);
-      throw err;
+        if (err.code === 409) { // If the subscription already exists, just return it
+            seneca.log.warn('subscription "' + subscriber_name + '" already exists.');
+            return topic.subscription(subscriber_name);
+        }
+        else {
+            seneca.log.info('Failed to create subscription: ', subscriber_name);
+            throw err;
+        }
     }
   }
 
